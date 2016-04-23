@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registration',
+    
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -128,11 +129,17 @@ STATICFILES_DIRS = (    os.path.join(BASE_DIR, 'static'),
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'testing@example.com' 
-EMAIL_HOST_USER = '' 
-EMAIL_HOST_PASSWORD = '' 
-EMAIL_USE_TLS = False 
-EMAIL_PORT = 1025
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#DEFAULT_FROM_EMAIL = 'testing@example.com' 
+#EMAIL_HOST_USER = '' 
+#EMAIL_HOST_PASSWORD = '' 
+#EMAIL_USE_TLS = False 
+#EMAIL_PORT = 1025
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+SENDGRID_EMAIL_PORT = 587
+SENDGRID_EMAIL_USERNAME = "ohid"
+SENDGRID_EMAIL_PASSWORD = "ohid2014"
+EMAIL_USE_TLS = True
 
 LOGIN_REDIRECT_URL = "home"
