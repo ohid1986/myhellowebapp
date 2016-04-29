@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'registration',
     
 ]
@@ -68,7 +69,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-        },
+        },  
     },
 ]
 
@@ -127,6 +128,9 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (    os.path.join(BASE_DIR, 'static'),
 )
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 ACCOUNT_ACTIVATION_DAYS = 7
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -136,6 +140,20 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False 
 EMAIL_PORT = 1025
 
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.sendgrid.net'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+#EMAIL_HOST_USER = '{{ }}'
+#EMAIL_HOST_PASSWORD = '{{ }}'
+#DEFAULT_FROM_EMAIL = ''
+#SERVER_EMAIL = ''
+
+SERVER_EMAIL = 'app_email@mydomain.com'
+ADMINS = [
+    ('your name', 'me@mydomain.com'),
+]
 
 
 LOGIN_REDIRECT_URL = "home"
+

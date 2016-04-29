@@ -5,26 +5,33 @@ from django.template.defaultfilters import slugify
 from django.template.loader import get_template 
 from django.core.mail import EmailMessage
 from django.template import Context
+from django.core.mail import mail_admins
 
 from collection.forms import ThingForm, ContactForm
 from collection.models import Thing
 
 
-
 def index(request):
     things = Thing.objects.all()
+
+    # uncomment below to test the mail_admins feature!
+    mail_admins("Our subject line", "Our content")
+
     return render(request, 'index.html', {
         'things': things,
     })
-
 
 def thing_detail(request, slug):
     # grab the object...
     thing = Thing.objects.get(slug=slug)
 
+    # new line! grab all the object's social accounts
+    social_accounts = thing.social_accounts.all()
+
     # and pass to the template
     return render(request, 'things/thing_detail.html', {
         'thing': thing,
+        'social_accounts': social_accounts,
     })
 
 
@@ -106,7 +113,7 @@ def browse_by_name(request, initial=None):
 
 def contact(request): 
     form_class = ContactForm
-    
+
     # new logic!
     if request.method == 'POST':
         form = form_class(data=request.POST)
@@ -135,7 +142,7 @@ def contact(request):
             )
             email.send()
             return redirect('contact')
-    
+
     return render(request, 'contact.html', { 
         'form': form_class,
     })
