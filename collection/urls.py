@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
@@ -8,6 +7,7 @@ from django.contrib.sitemaps.views import sitemap
 from collection.backends import MyRegistrationView
 from collection import views
 from collection.sitemap import ThingSitemap, StaticSitemap, HomepageSitemap
+
 
 sitemaps = {
     'things': ThingSitemap,
@@ -28,12 +28,28 @@ urlpatterns = [
         views.thing_detail, name='thing_detail'),
     url(r'^things/(?P<slug>[-\w]+)/edit/$', 
         views.edit_thing, name='edit_thing'),
+    
+    url(r'^things/(?P<slug>[-\w]+)/edit/images/$',
+        views.edit_thing_uploads, name='edit_thing_uploads'),
+    url(r'^delete/(?P<id>[-\w]+)/$', views.delete_upload, name='delete_upload'),
+    
+    url(r'^things/(?P<slug>[-\w]+)/edit/email/$', views.edit_email, name='edit_email'),
 
     url(r'^browse/$', RedirectView.as_view(pattern_name='browse')),
     url(r'^browse/name/$', 
         views.browse_by_name, name='browse'),
     url(r'^browse/name/(?P<initial>[-\w]+)/$', 
         views.browse_by_name, name='browse_by_name'),
+    
+   # charge views
+    url(r'^charge/$', views.charge, name='charge'),
+
+    # api views
+    url(r'^api/things/$', views.api_thing_list,
+        name="api_thing_list"),
+    url(r'^api/things/(?P<id>[0-9]+)/$', views.api_thing_detail,
+        name="api_thing_detail"),
+    
 
     # password reset urls
     url(r'^accounts/password/reset/$', password_reset, 
@@ -59,12 +75,7 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'),
 
     url(r'^accounts/', include('registration.backends.simple.urls')),
+    
    
 ]
 
-if settings.DEBUG: 
-    urlpatterns += [
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', { 
-            'document_root': settings.MEDIA_ROOT,
-        }),
-    ]

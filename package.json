@@ -1,0 +1,30 @@
+{
+  "name": "myhellowebapp",
+  "version": "1.0.0",
+  "description": "My app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohid1986/myhellowebapp.git"
+  },
+  "author": "Ohid",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ohid1986/myhellowebapp/issues"
+  },
+  "homepage": "https://github.com/ohid1986/myhellowebapp#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "browser-sync": "^2.12.5",
+    "concurrently": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-postcss": "^6.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "node-sass": "^3.6.0"
+  }
+}

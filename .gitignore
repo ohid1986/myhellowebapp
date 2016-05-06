@@ -1,6 +1,8 @@
 /*.tgz
+node_modules
 db.sqlite3
 django_site
+hellowebapp/secret_settings.py
 *.pyc
 staticfiles
 .DS_STORE
@@ -17,7 +19,7 @@ labels
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-
+media/
 # C extensions
 *.so
 

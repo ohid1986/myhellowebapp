@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
+from hellowebapp.secret_settings import *
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm00$gj4w^%!i#c05*@p-+y6#p4-9y=4(l5eo&c(fkn9#=9ay2h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'registration',
+    'rest_framework',
     
 ]
 
@@ -140,14 +140,7 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False 
 EMAIL_PORT = 1025
 
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'smtp.sendgrid.net'
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
-#EMAIL_HOST_USER = '{{ }}'
-#EMAIL_HOST_PASSWORD = '{{ }}'
-#DEFAULT_FROM_EMAIL = ''
-#SERVER_EMAIL = ''
+
 
 SERVER_EMAIL = 'app_email@mydomain.com'
 ADMINS = [
@@ -156,4 +149,16 @@ ADMINS = [
 
 
 LOGIN_REDIRECT_URL = "home"
+
+REST_FRAMEWORK = {
+    # Use Django's standard 'django.contrib.auth' permissions, 
+    # or allow read-only access for unauthenticated users. 
+    'DEFAULT_PERMISSION_CLASSES': [
+        # we're going to use this because we're just showing data
+        'rest_framework.permissions.AllowAny',
+        # BUT use this one or another restricted permission if you 
+        # update your API to allow update and deleting
+        # 'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
